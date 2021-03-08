@@ -499,7 +499,6 @@ class MainUi(TM):
             self.ui.edit_line.clear()
             self.ui.edit_line.setHidden(True)
             self.ui.hotkey_name.setHidden(True)
-            self.ui.edit_line.setEnabled(False)
             self.ui.save_button.setHidden(True)
             self.ui.listen_qthread.stop()
             self.save_hotkey_info(self.name_hotkey)
@@ -545,9 +544,16 @@ class Test(QMainWindow, MainUi):
         super(Test, self).__init__(*args, **kwargs)
         self.button = QPushButton(self, text='click')
         self.button.clicked.connect(self.open_)
+        self.add_event_info(self.test_1, '测试1', 1)
+        self.add_event_info(self.test_1, '测试2', 2)
+        self.add_event_info(self.test_1, '测试3', num=3)
 
     def open_(self):
         self.open_hotkey_settings()
+
+    def test_1(self, num):
+        QMessageBox.warning(self, '测试', str(num), buttons=QMessageBox.Ok)
+
 
 
 if __name__ == '__main__':
